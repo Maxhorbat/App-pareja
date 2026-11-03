@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corazón Conectado — Versión 1</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Fondo animado -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Contenedor principal -->
+  <div class="app">
+    <!-- Header estilo Jarvis -->
+    <header class="header">
+      <div class="header-left">
+        <div class="status-dot"></div>
+        <span class="status-text">SISTEMA ACTIVO</span>
+      </div>
+      <div class="header-center">
+        <h1 class="logo">CORAZÓN CONECTADO</h1>
+        <p class="subtitle">v1.0 · Solo para nosotros</p>
+      </div>
+      <div class="header-right">
+        <div class="couple-badge">
+          <span class="heart">♥</span>
+          <span id="couple-names">Tú & Yo</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Panel central holográfico -->
+    <main class="main">
+      <!-- Anillo holográfico central -->
+      <div class="hud-ring">
+        <div class="ring ring-outer"></div>
+        <div class="ring ring-middle"></div>
+        <div class="ring ring-inner"></div>
+        <div class="center-core">
+          <div class="core-glow"></div>
+          <span class="core-icon">♥</span>
+        </div>
+      </div>
+
+      <!-- Navegación principal -->
+      <nav class="nav-tabs">
+        <button class="tab active" data-tab="imagenes">
+          <span class="tab-icon">🖼</span>
+          <span>Imágenes</span>
+        </button>
+        <button class="tab" data-tab="musica">
+          <span class="tab-icon">🎵</span>
+          <span>Música</span>
+        </button>
+        <button class="tab" data-tab="tiempo">
+          <span class="tab-icon">⏱</span>
+          <span>Tiempo</span>
+        </button>
+        <button class="tab" data-tab="nosotros">
+          <span class="tab-icon">💫</span>
+          <span>Nosotros</span>
+        </button>
+      </nav>
+
+      <!-- Contenido de pestañas -->
+      <div class="tab-content">
+        <!-- Pestaña Imágenes -->
+        <section id="imagenes" class="panel active">
+          <div class="panel-header">
+            <h2>Galería Compartida</h2>
+            <p class="panel-desc">Nuestros momentos juntos</p>
+          </div>
+
+          <div class="upload-zone" id="upload-images">
+            <div class="upload-icon">📷</div>
+            <p>Arrastra imágenes aquí o haz clic para subir</p>
+            <input type="file" id="image-input" accept="image/*" multiple hidden>
+          </div>
+
+          <div class="gallery" id="image-gallery">
+            <!-- Las imágenes se cargarán aquí -->
+            <div class="empty-state">
+              <p>Aún no hay imágenes compartidas</p>
+              <p class="hint">Sube la primera para empezar</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Pestaña Música -->
+        <section id="musica" class="panel">
+          <div class="panel-header">
+            <h2>Nuestra Música</h2>
+            <p class="panel-desc">Canciones que nos representan</p>
+          </div>
+
+          <div class="upload-zone" id="upload-music">
+            <div class="upload-icon">🎧</div>
+            <p>Arrastra canciones aquí o haz clic para subir</p>
+            <input type="file" id="music-input" accept="audio/*" multiple hidden>
+          </div>
+
+          <div class="playlist" id="music-playlist">
+            <div class="empty-state">
+              <p>Aún no hay canciones compartidas</p>
+              <p class="hint">Sube la primera canción de nuestra historia</p>
+            </div>
+          </div>
+
+          <!-- Reproductor -->
+          <div class="player" id="player" hidden>
+            <div class="player-info">
+              <span class="now-playing-label">Reproduciendo</span>
+              <span class="now-playing-title" id="now-playing">—</span>
+            </div>
+            <audio id="audio-player" controls></audio>
+          </div>
+        </section>
+
+        <!-- Pestaña Tiempo (días de novios) -->
+        <section id="tiempo" class="panel">
+          <div class="panel-header">
+            <h2>Tiempo Juntos</h2>
+            <p class="panel-desc">Desde el 3 de julio de 2026</p>
+          </div>
+
+          <div class="love-timer">
+            <div class="timer-label">Llevamos siendo novios</div>
+            <div class="timer-grid">
+              <div class="timer-box">
+                <span class="timer-value" id="days">0</span>
+                <span class="timer-unit">Días</span>
+              </div>
+              <div class="timer-box">
+                <span class="timer-value" id="hours">0</span>
+                <span class="timer-unit">Horas</span>
+              </div>
+              <div class="timer-box">
+                <span class="timer-value" id="minutes">0</span>
+                <span class="timer-unit">Min</span>
+              </div>
+              <div class="timer-box">
+                <span class="timer-value" id="seconds">0</span>
+                <span class="timer-unit">Seg</span>
+              </div>
+            </div>
+            <div class="timer-hearts">♥ · ♥ · ♥</div>
+            <p class="timer-date">Inicio: 3 de julio de 2026</p>
+          </div>
+        </section>
+
+        <!-- Pestaña Nosotros -->
+        <section id="nosotros" class="panel">
+          <div class="panel-header">
+            <h2>Nuestro Espacio</h2>
+            <p class="panel-desc">Configuración de la pareja</p>
+          </div>
+
+          <div class="nosotros-form">
+            <div class="form-group">
+              <label for="name1">Apodo de Aharon</label>
+              <input type="text" id="name1" placeholder="Tu nombre" value="Tú">
+            </div>
+            <div class="form-group">
+              <label for="name2">Apodo de Mafer</label>
+              <input type="text" id="name2" placeholder="Nombre de tu pareja" value="Yo">
+            </div>
+            <button class="btn-primary" id="save-names">Guardar apodos</button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>Corazón Conectado · Solo para Mafer · v1.0</span>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
