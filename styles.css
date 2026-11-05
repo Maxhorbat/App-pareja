@@ -720,6 +720,122 @@ body {
   }
 }
 
+/* ---------- Sync & progress ---------- */
+.sync-card {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.sync-card h3 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  color: var(--pink-soft);
+  margin-bottom: 10px;
+}
+
+.sync-help {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 1.45;
+}
+
+.sync-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 12px;
+  opacity: 0.85;
+}
+
+.upload-progress {
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.progress-bar {
+  height: 6px;
+  background: rgba(255, 45, 149, 0.15);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--pink), var(--magenta));
+  border-radius: 99px;
+  transition: width 0.2s ease;
+}
+
+#image-progress-text,
+#music-progress-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.info-card {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 8px;
+}
+
+.info-card h3 {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  color: var(--pink-soft);
+  margin-bottom: 12px;
+}
+
+.info-card .steps {
+  margin: 0 0 16px 18px;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.info-card .steps li {
+  margin-bottom: 6px;
+}
+
+.info-card a {
+  color: var(--pink-soft);
+  text-decoration: underline;
+}
+
+.info-card code {
+  font-size: 0.8rem;
+  background: rgba(255, 45, 149, 0.15);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+textarea#firebase-config {
+  width: 100%;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: ui-monospace, monospace;
+  font-size: 0.8rem;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+textarea#firebase-config:focus {
+  border-color: var(--pink);
+  box-shadow: 0 0 12px rgba(255, 45, 149, 0.2);
+}
+
 /* ---------- Footer ---------- */
 .footer {
   text-align: center;
@@ -761,4 +877,19 @@ body {
   .gallery {
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
   }
+}
+
+/* ---------- SQL box (instrucciones) ---------- */
+.sql-box {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  font-family: ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  overflow-x: auto;
+  white-space: pre;
+  margin: 12px 0 16px;
+  line-height: 1.4;
 }
