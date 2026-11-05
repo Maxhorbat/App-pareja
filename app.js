@@ -96,8 +96,8 @@ function setSyncUI(connected, message) {
 // ---------- Supabase init ----------
 function getSavedConfig() {
   try {
-    const url = localStorage.getItem('cc_supabase_url');
-    const key = localStorage.getItem('cc_supabase_key');
+    const url = localStorage.getItem('https://ftjjrkdasansfyumsbci.supabase.co/rest/v1/');
+    const key = localStorage.getItem('sb_publishable_QSAQxRLU8ldIurTV3oAnvg_PxInfucC');
     if (url && key) return { url, key };
   } catch (_) {}
   return null;
