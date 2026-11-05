@@ -45,30 +45,42 @@ const musicProgress = document.getElementById('music-progress');
 const musicProgressFill = document.getElementById('music-progress-fill');
 const musicProgressText = document.getElementById('music-progress-text');
 
-// ---------- Tabs ----------
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    const target = tab.dataset.tab;
-    tabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    panels.forEach(p => {
-      p.classList.remove('active');
-      if (p.id === target) p.classList.add('active');
-    });
+// ---------- Tabs (robusto) ----------
+function switchTab(target) {
+  document.querySelectorAll('.tab').forEach(function(t) {
+    t.classList.toggle('active', t.dataset.tab === target);
+  });
+  document.querySelectorAll('.panel').forEach(function(p) {
+    var isActive = p.id === target;
+    p.classList.toggle('active', isActive);
+    // Forzar display por si el CSS falla
+    p.style.display = isActive ? 'block' : 'none';
+  });
+}
+
+document.querySelectorAll('.tab').forEach(function(tab) {
+  tab.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    switchTab(tab.dataset.tab);
   });
 });
 
+// Asegurar que el panel inicial se vea
+switchTab('imagenes');
+
 // ---------- Upload helpers ----------
 function setupUpload(zone, input, handler) {
-  zone.addEventListener('click', () => input.click());
-  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
-  zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
-  zone.addEventListener('drop', e => {
+  if (!zone || !input) return;
+  zone.addEventListener('click', function() { input.click(); });
+  zone.addEventListener('dragover', function(e) { e.preventDefault(); zone.classList.add('dragover'); });
+  zone.addEventListener('dragleave', function() { zone.classList.remove('dragover'); });
+  zone.addEventListener('drop', function(e) {
     e.preventDefault();
     zone.classList.remove('dragover');
     if (e.dataTransfer.files.length) handler(e.dataTransfer.files);
   });
-  input.addEventListener('change', () => {
+  input.addEventListener('change', function() {
     if (input.files.length) {
       handler(input.files);
       input.value = '';
@@ -96,8 +108,8 @@ function setSyncUI(connected, message) {
 // ---------- Supabase init ----------
 function getSavedConfig() {
   try {
-    const url = localStorage.getItem('https://ftjjrkdasansfyumsbci.supabase.co/rest/v1/');
-    const key = localStorage.getItem('sb_publishable_QSAQxRLU8ldIurTV3oAnvg_PxInfucC');
+    const url = localStorage.getItem('cc_supabase_url');
+    const key = localStorage.getItem('cc_supabase_key');
     if (url && key) return { url, key };
   } catch (_) {}
   return null;
@@ -416,36 +428,42 @@ function loadNames() {
   }
 }
 
-saveNamesBtn.addEventListener('click', function() {
-  var name1 = name1Input.value.trim() || 'Aharon';
-  var name2 = name2Input.value.trim() || 'Mafer';
-  localStorage.setItem('cc_names', JSON.stringify({ name1: name1, name2: name2 }));
-  coupleNamesEl.textContent = name1 + ' & ' + name2;
-  saveNamesBtn.textContent = '¡Guardado!';
-  setTimeout(function() { saveNamesBtn.textContent = 'Guardar apodos'; }, 1500);
-});
+if (saveNamesBtn) {
+  saveNamesBtn.addEventListener('click', function() {
+    var name1 = (name1Input && name1Input.value.trim()) || 'Aharon';
+    var name2 = (name2Input && name2Input.value.trim()) || 'Mafer';
+    localStorage.setItem('cc_names', JSON.stringify({ name1: name1, name2: name2 }));
+    if (coupleNamesEl) coupleNamesEl.textContent = name1 + ' & ' + name2;
+    saveNamesBtn.textContent = '¡Guardado!';
+    setTimeout(function() { saveNamesBtn.textContent = 'Guardar apodos'; }, 1500);
+  });
+}
 
 // ---------- Conectar código ----------
-connectBtn.addEventListener('click', function() {
-  connectCouple(coupleCodeInput.value);
-});
+if (connectBtn) {
+  connectBtn.addEventListener('click', function() {
+    connectCouple(coupleCodeInput ? coupleCodeInput.value : '');
+  });
+}
 
 // ---------- Guardar config Supabase ----------
-saveSupabaseBtn.addEventListener('click', function() {
-  var url = supabaseUrlInput.value.trim();
-  var key = supabaseKeyInput.value.trim();
-  if (!url || !key) {
-    alert('Completá la URL y la clave anon public');
-    return;
-  }
-  localStorage.setItem('cc_supabase_url', url);
-  localStorage.setItem('cc_supabase_key', key);
-  saveSupabaseBtn.textContent = '¡Guardado!';
-  setTimeout(function() { saveSupabaseBtn.textContent = 'Guardar configuración Supabase'; }, 1500);
+if (saveSupabaseBtn) {
+  saveSupabaseBtn.addEventListener('click', function() {
+    var url = supabaseUrlInput ? supabaseUrlInput.value.trim() : '';
+    var key = supabaseKeyInput ? supabaseKeyInput.value.trim() : '';
+    if (!url || !key) {
+      alert('Completá la URL y la clave anon public');
+      return;
+    }
+    localStorage.setItem('https://ftjjrkdasansfyumsbci.supabase.co/rest/v1/', url);
+    localStorage.setItem('sb_publishable_QSAQxRLU8ldIurTV3oAnvg_PxInfucC', key);
+    saveSupabaseBtn.textContent = '¡Guardado!';
+    setTimeout(function() { saveSupabaseBtn.textContent = 'Guardar configuración Supabase'; }, 1500);
 
-  var code = localStorage.getItem('cc_couple_code') || coupleCodeInput.value;
-  if (code) connectCouple(code);
-});
+    var code = localStorage.getItem('cc_couple_code') || (coupleCodeInput ? coupleCodeInput.value : '');
+    if (code) connectCouple(code);
+  });
+}
 
 // ---------- Reloj ----------
 var START_DATE = new Date(2026, 6, 3, 0, 0, 0);
