@@ -8,24 +8,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <!-- Supabase (100% gratis) -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-  <!-- Fondo animado -->
   <div class="bg-orbs">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
   </div>
 
-  <!-- Contenedor principal -->
   <div class="app">
-    <!-- Header estilo Jarvis -->
     <header class="header">
       <div class="header-left">
         <div class="status-dot" id="sync-dot"></div>
-        <span class="status-text" id="sync-status">SIN CONEXIÓN</span>
+        <span class="status-text" id="sync-status">LOCAL</span>
       </div>
       <div class="header-center">
         <h1 class="logo">CORAZÓN CONECTADO</h1>
@@ -39,9 +35,7 @@
       </div>
     </header>
 
-    <!-- Panel central holográfico -->
     <main class="main">
-      <!-- Anillo holográfico central -->
       <div class="hud-ring">
         <div class="ring ring-outer"></div>
         <div class="ring ring-middle"></div>
@@ -52,79 +46,60 @@
         </div>
       </div>
 
-      <!-- Navegación principal -->
-      <nav class="nav-tabs">
-        <button class="tab active" data-tab="imagenes">
+      <nav class="nav-tabs" id="nav-tabs">
+        <button type="button" class="tab active" data-tab="imagenes">
           <span class="tab-icon">🖼</span>
           <span>Imágenes</span>
         </button>
-        <button class="tab" data-tab="musica">
+        <button type="button" class="tab" data-tab="musica">
           <span class="tab-icon">🎵</span>
           <span>Música</span>
         </button>
-        <button class="tab" data-tab="tiempo">
+        <button type="button" class="tab" data-tab="tiempo">
           <span class="tab-icon">⏱</span>
           <span>Tiempo</span>
         </button>
-        <button class="tab" data-tab="nosotros">
+        <button type="button" class="tab" data-tab="nosotros">
           <span class="tab-icon">💫</span>
           <span>Nosotros</span>
         </button>
       </nav>
 
-      <!-- Contenido de pestañas -->
       <div class="tab-content">
-        <!-- Pestaña Imágenes -->
+        <!-- IMÁGENES -->
         <section id="imagenes" class="panel active">
           <div class="panel-header">
             <h2>Galería Compartida</h2>
-            <p class="panel-desc">Nuestros momentos juntos · se sincroniza en tiempo real</p>
+            <p class="panel-desc">Nuestros momentos juntos</p>
           </div>
-
           <div class="upload-zone" id="upload-images">
             <div class="upload-icon">📷</div>
-            <p>Arrastra imágenes aquí o haz clic para subir</p>
-            <input type="file" id="image-input" accept="image/*" multiple hidden>
+            <p>Haz clic o arrastra imágenes aquí</p>
+            <input type="file" id="image-input" accept="image/*" multiple>
           </div>
-
           <div class="upload-progress" id="image-progress" hidden>
             <div class="progress-bar"><div class="progress-fill" id="image-progress-fill"></div></div>
             <span id="image-progress-text">Subiendo...</span>
           </div>
-
-          <div class="gallery" id="image-gallery">
-            <div class="empty-state">
-              <p>Aún no hay imágenes compartidas</p>
-              <p class="hint">Conecta el código de pareja y sube la primera</p>
-            </div>
-          </div>
+          <div class="gallery" id="image-gallery"></div>
         </section>
 
-        <!-- Pestaña Música -->
+        <!-- MÚSICA -->
         <section id="musica" class="panel">
           <div class="panel-header">
             <h2>Nuestra Música</h2>
-            <p class="panel-desc">Canciones que nos representan · se sincroniza en tiempo real</p>
+            <p class="panel-desc">Canciones que nos representan</p>
           </div>
-
           <div class="upload-zone" id="upload-music">
             <div class="upload-icon">🎧</div>
-            <p>Arrastra canciones aquí o haz clic para subir</p>
-            <input type="file" id="music-input" accept="audio/*" multiple hidden>
+            <p>Haz clic o arrastra canciones aquí</p>
+            <input type="file" id="music-input" accept="audio/*" multiple>
           </div>
-
           <div class="upload-progress" id="music-progress" hidden>
             <div class="progress-bar"><div class="progress-fill" id="music-progress-fill"></div></div>
             <span id="music-progress-text">Subiendo...</span>
           </div>
-
-          <div class="playlist" id="music-playlist">
-            <div class="empty-state">
-              <p>Aún no hay canciones compartidas</p>
-              <p class="hint">Conecta el código de pareja y sube la primera</p>
-            </div>
-          </div>
-
+          <div class="playlist" id="music-playlist"></div>
           <div class="player" id="player" hidden>
             <div class="player-info">
               <span class="now-playing-label">Reproduciendo</span>
@@ -134,13 +109,12 @@
           </div>
         </section>
 
-        <!-- Pestaña Tiempo -->
+        <!-- TIEMPO -->
         <section id="tiempo" class="panel">
           <div class="panel-header">
             <h2>Tiempo Juntos</h2>
             <p class="panel-desc">Desde el 3 de julio de 2026</p>
           </div>
-
           <div class="love-timer">
             <div class="timer-label">Llevamos siendo novios</div>
             <div class="timer-grid">
@@ -166,23 +140,22 @@
           </div>
         </section>
 
-        <!-- Pestaña Nosotros -->
+        <!-- NOSOTROS -->
         <section id="nosotros" class="panel">
           <div class="panel-header">
             <h2>Nuestro Espacio</h2>
-            <p class="panel-desc">Configuración y sincronización (100% gratis)</p>
+            <p class="panel-desc">Configuración y sincronización</p>
           </div>
 
           <div class="sync-card">
-            <h3>🔗 Sincronización</h3>
-            <p class="sync-help">Ambos deben poner el <strong>mismo código de pareja</strong> para ver lo que sube el otro en tiempo real.</p>
-            
+            <h3>🔗 Sincronización (opcional)</h3>
+            <p class="sync-help">Sin configurar nada, la app guarda todo en este dispositivo. Si quieren ver lo mismo en los dos celulares, configuren Supabase (gratis) abajo.</p>
             <div class="form-group">
               <label for="couple-code">Código de pareja</label>
               <input type="text" id="couple-code" placeholder="Ej: AHARONMAFER" maxlength="30">
             </div>
-            <button class="btn-primary" id="connect-btn">Conectar / Guardar código</button>
-            <p class="sync-note" id="sync-note">Estado: no conectado</p>
+            <button type="button" class="btn-primary" id="connect-btn">Conectar código</button>
+            <p class="sync-note" id="sync-note">Modo local activo</p>
           </div>
 
           <div class="nosotros-form">
@@ -194,18 +167,17 @@
               <label for="name2">Apodo de Mafer</label>
               <input type="text" id="name2" placeholder="Mafer" value="Mafer">
             </div>
-            <button class="btn-primary" id="save-names">Guardar apodos</button>
+            <button type="button" class="btn-primary" id="save-names">Guardar apodos</button>
           </div>
 
           <div class="info-card">
-            <h3>Cómo activar la sincronización (gratis, una sola vez)</h3>
+            <h3>Activar sincronización entre dispositivos (gratis)</h3>
             <ol class="steps">
-              <li>Entrá a <a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a> y creá una cuenta gratis</li>
-              <li>Creá un <strong>nuevo proyecto</strong> (elige la región más cercana)</li>
-              <li>Cuando esté listo, andá a <strong>Storage</strong> → New bucket → nombre: <code>couple-files</code> → marcá <strong>Public bucket</strong></li>
-              <li>Andá a <strong>SQL Editor</strong> → New query y pegá esto, luego Run:</li>
+              <li>Entrá a <a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a> y creá cuenta gratis</li>
+              <li>Creá un proyecto nuevo</li>
+              <li>Storage → New bucket → nombre: <code>couple-files</code> → Public bucket</li>
+              <li>SQL Editor → pegá y ejecutá:</li>
             </ol>
-
             <pre class="sql-box">create table if not exists shared_items (
   id text primary key,
   couple_code text not null,
@@ -214,20 +186,12 @@
   url text not null,
   created_at bigint
 );
-
 create index if not exists idx_couple on shared_items (couple_code);
-
 alter table shared_items enable row level security;
-
-create policy "permitir todo" on shared_items
-  for all using (true) with check (true);</pre>
-
+create policy "permitir todo" on shared_items for all using (true) with check (true);</pre>
             <ol class="steps" start="5">
-              <li>Andá a <strong>Project Settings</strong> → <strong>API</strong></li>
-              <li>Copiá el <strong>Project URL</strong> y la clave <strong>anon public</strong></li>
-              <li>Pegálos abajo y tocá Guardar</li>
+              <li>Project Settings → API → copiá URL y anon key</li>
             </ol>
-
             <div class="form-group">
               <label for="supabase-url">Project URL</label>
               <input type="text" id="supabase-url" placeholder="https://xxxxx.supabase.co">
@@ -236,8 +200,7 @@ create policy "permitir todo" on shared_items
               <label for="supabase-key">anon public key</label>
               <input type="text" id="supabase-key" placeholder="eyJhbGciOi...">
             </div>
-            <button class="btn-primary" id="save-supabase">Guardar configuración Supabase</button>
-            <p class="sync-note">Esto se guarda solo en tu navegador. La otra persona también debe pegar la misma URL y la misma clave.</p>
+            <button type="button" class="btn-primary" id="save-supabase">Guardar Supabase</button>
           </div>
         </section>
       </div>
@@ -251,3 +214,4 @@ create policy "permitir todo" on shared_items
   <script src="app.js"></script>
 </body>
 </html>
+  

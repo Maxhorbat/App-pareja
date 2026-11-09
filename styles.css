@@ -318,7 +318,7 @@ body {
 }
 
 .panel {
-  display: none !important;
+  display: none;
   background: var(--bg-panel);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -328,7 +328,7 @@ body {
 }
 
 .panel.active {
-  display: block !important;
+  display: block;
   animation: fadeIn 0.35s ease;
 }
 
@@ -892,4 +892,10 @@ textarea#firebase-config:focus {
   white-space: pre;
   margin: 12px 0 16px;
   line-height: 1.4;
+}
+
+
+/* file inputs hidden, zone handles click */
+.upload-zone input[type="file"] {
+  display: none !important;
 }
