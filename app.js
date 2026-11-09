@@ -120,8 +120,8 @@
 
   // ---------- Supabase ----------
   function getSupabaseConfig() {
-    var url = localStorage.getItem('https://ftjjrkdasansfyumsbci.supabase.co');
-    var key = localStorage.getItem('sb_publishable_QSAQxRLU8ldIurTV3oAnvg_PxInfucC');
+    var url = localStorage.getItem('cc_supabase_url');
+    var key = localStorage.getItem('cc_supabase_key');
     if (url && key) return { url: url, key: key };
     return null;
   }
