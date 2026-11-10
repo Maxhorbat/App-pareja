@@ -148,8 +148,7 @@
           </div>
 
           <div class="sync-card">
-            <h3>🔗 Sincronización (opcional)</h3>
-            <p class="sync-help">Sin configurar nada, la app guarda todo en este dispositivo. Si quieren ver lo mismo en los dos celulares, configuren Supabase (gratis) abajo.</p>
+            <h3>🔗 Sincronización</h3>
             <div class="form-group">
               <label for="couple-code">Código de pareja</label>
               <input type="text" id="couple-code" placeholder="Ej: AHARONMAFER" maxlength="30">
@@ -172,26 +171,6 @@
 
           <div class="info-card">
             <h3>Activar sincronización entre dispositivos (gratis)</h3>
-            <ol class="steps">
-              <li>Entrá a <a href="https://supabase.com" target="_blank" rel="noopener">supabase.com</a> y creá cuenta gratis</li>
-              <li>Creá un proyecto nuevo</li>
-              <li>Storage → New bucket → nombre: <code>couple-files</code> → Public bucket</li>
-              <li>SQL Editor → pegá y ejecutá:</li>
-            </ol>
-            <pre class="sql-box">create table if not exists shared_items (
-  id text primary key,
-  couple_code text not null,
-  type text not null,
-  name text,
-  url text not null,
-  created_at bigint
-);
-create index if not exists idx_couple on shared_items (couple_code);
-alter table shared_items enable row level security;
-create policy "permitir todo" on shared_items for all using (true) with check (true);</pre>
-            <ol class="steps" start="5">
-              <li>Project Settings → API → copiá URL y anon key</li>
-            </ol>
             <div class="form-group">
               <label for="supabase-url">Project URL</label>
               <input type="text" id="supabase-url" placeholder="https://xxxxx.supabase.co">
